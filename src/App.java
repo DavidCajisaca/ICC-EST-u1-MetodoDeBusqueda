@@ -1,30 +1,40 @@
-
 import java.util.Scanner;
 
 public class App {
     public static void main(String[] args) throws Exception {
-        Scanner scanner = new Scanner(System.in);
-        MetodosBusqueda metodosbusqueda= new MetodosBusqueda();
-        //Crear un arreglo de 1 a 100000 en orden
-        int [] arreglo=new int[100000];
+        Scanner sc = new Scanner(System.in);
+        MetodosBusqueda mB = new MetodosBusqueda();
+
+        int[] arreglo = new int[100000];
         for (int i = 0; i < 100000; i++) {
-          arreglo[i]=i+1;
+            arreglo[i] = i + 1;
+        }
 
-        }
-        metodosbusqueda.printArreglo(arreglo);
-        int posi = metodosbusqueda.busquedasecuen(arreglo, 50418);
-        if(posi !=-1){
-            System.out.println("El valor secuencial esta en: "+ posi);
-        } else{
-            System.out.println("Valor no encontrado secuencial ");
-        }
-        int posibi = metodosbusqueda.busquedabinaria(arreglo, 50418);
-        if(posibi!=-1){
-            System.out.println("El valor binario esta en: "+posibi);
+   
+        mB.printArreglo(arreglo);
 
-        }else{
-            System.out.println("El valor binario  no esta");
+        long startTime = System.currentTimeMillis();
+        int posicionSecuencial = mB.busquedasecuen(arreglo, 50418);
+        long endTime = System.currentTimeMillis();
+        
+        if (posicionSecuencial != -1) {
+            System.out.println("Secuencial: El valor se encuentra en la posición: " + posicionSecuencial);
+        } else {
+            System.out.println("Secuencial: Valor no encontrado...");
         }
+        System.out.println("Tiempo de búsqueda secuencial: " + (endTime - startTime) + " ms");
+
+        startTime = System.currentTimeMillis();
+        int posicionBinaria = mB.busquedabinaria(arreglo, 50418);
+        endTime = System.currentTimeMillis();
+
+        if (posicionBinaria != -1) {
+            System.out.println("Binaria: El valor se encuentra en la posición: " + posicionBinaria);
+        } else {
+            System.out.println("Binaria: Valor no encontrado...");
+        }
+        System.out.println("Tiempo de búsqueda binaria: " + (endTime - startTime) + " ms");
+
+        sc.close();
     }
-
 }
